@@ -15,5 +15,6 @@ module.exports.createUser = async ({
         email,
         password
     });
+    await user.save(); // <-- Make sure this line exists!
     return user;
 }
