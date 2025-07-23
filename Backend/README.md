@@ -356,3 +356,178 @@ curl -X POST http://localhost:4000/captains/register \
     }
   }'
 ```
+
+---
+
+# Captain Login Endpoint Documentation
+
+## Endpoint
+
+`POST /captains/login`
+
+---
+
+## Description
+
+Authenticates a captain and returns a JWT token and captain data if credentials are valid.
+
+---
+
+## Request Body
+
+```json
+{
+  "email": "captain@example.com",
+  "password": "yourpassword"
+}
+```
+
+### Field Requirements
+
+- `email` (string, required): Must be a valid email address.
+- `password` (string, required): At least 6 characters.
+
+---
+
+## Responses
+
+### Success
+
+- **Status Code:** `200 OK`
+- **Body:**
+    ```json
+    {
+      "token": "<jwt_token>",
+      "captain": {
+        "_id": "captain_id",
+        "fullname": {
+          "firstname": "CaptainFirst",
+          "lastname": "CaptainLast"
+        },
+        "email": "captain@example.com",
+        "vehicle": {
+          "color": "red",
+          "plate": "MP 04 XY 1234",
+          "capacity": 4,
+          "vehicleType": "car"
+        }
+      }
+    }
+    ```
+
+### Error
+
+- **Status Code:** `400 Bad Request`
+- **Body:**
+    ```json
+    {
+      "message": "Invalid email or password"
+    }
+    ```
+
+---
+
+# Captain Profile Endpoint Documentation
+
+## Endpoint
+
+`GET /captains/profile`
+
+---
+
+## Description
+
+Returns the authenticated captain's profile information. Requires a valid JWT token in the cookie or `Authorization` header.
+
+---
+
+## Request Headers
+
+- `Cookie: token=<jwt_token>`
+- or
+- `Authorization: Bearer <jwt_token>`
+
+---
+
+## Responses
+
+### Success
+
+- **Status Code:** `200 OK`
+- **Body:**
+    ```json
+    {
+      "captain": {
+        "_id": "captain_id",
+        "fullname": {
+          "firstname": "CaptainFirst",
+          "lastname": "CaptainLast"
+        },
+        "email": "captain@example.com",
+        "vehicle": {
+          "color": "red",
+          "plate": "MP 04 XY 1234",
+          "capacity": 4,
+          "vehicleType": "car"
+        }
+      }
+    }
+    ```
+
+### Error
+
+- **Status Code:** `401 Unauthorized`
+- **Body:**
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+---
+
+# Captain Logout Endpoint Documentation
+
+## Endpoint
+
+`GET /captains/logout`
+
+---
+
+## Description
+
+Logs out the authenticated captain by blacklisting the JWT token and clearing the cookie.
+
+---
+
+## Request Headers
+
+- `Cookie: token=<jwt_token>`
+- or
+- `Authorization: Bearer <jwt_token>`
+
+---
+
+## Responses
+
+### Success
+
+- **Status Code:** `200 OK`
+- **Body:**
+    ```json
+    {
+      "message": "Logged out successfully"
+    }
+    ```
+
+### Error
+
+- **Status Code:** `401 Unauthorized`
+- **Body:**
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+---
