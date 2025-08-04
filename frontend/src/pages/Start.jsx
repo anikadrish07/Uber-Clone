@@ -14,7 +14,7 @@ const Home = () => {
 
             {/* Bottom content */}
             <div className="absolute bottom-0 w-full bg-white px-5 py-6">
-                <h2 className="text-2xl font-bold text-black">Get Started with Uber</h2>
+                <h2 className="text-2xl flex item-center justify-center font-bold text-black">Get Started with Uber</h2>
                 <Link to = '/login' className="flex item-center justify-center w-full bg-black text-white py-3 rounded mt-4 text-base">Continue</Link>
             </div>
         </div>
