@@ -11,10 +11,11 @@ import UserLogout from './pages/UserLogout';
 import CaptainHome from './pages/CaptainHome';
 import CaptainProtectedWrapper from './pages/CaptainProtectedWrapper';
 import Riding from './pages/Riding';
+import CaptainRiding from './pages/CaptainRiding';
 
 const App = () => {
   return (
-    <div className='bg-red-700'>
+    <div className=''>
       <Routes>
         <Route path='/' element={<Start />} />
         <Route path='/login' element={<UserLogin />} />
@@ -37,6 +38,8 @@ const App = () => {
             <CaptainHome />
           </CaptainProtectedWrapper>
         } />
+
+        <Route path='/captainRiding' element={<CaptainRiding />} />
 
       </Routes>
     </div>

@@ -21,6 +21,9 @@ module.exports.authUser = async (req, res, next) => {
         const user = await User.findById(decoded._id);
         
         req.user = user;
+        if (!user) {
+            return res.status(401).json({ message: 'Unauthorized: User not found' });
+        }
         return next();
 
     } catch (err) {

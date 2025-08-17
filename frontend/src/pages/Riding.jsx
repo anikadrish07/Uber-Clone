@@ -1,14 +1,28 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import 'remixicon/fonts/remixicon.css'
+// import LiveTracking from '../components/LiveTracking'
+import { useEffect, useContext } from 'react'
+import { SocketContext } from '../context/SocketContext'
+import { useNavigate } from 'react-router-dom'
 
-const Riding = () => {
+const Riding = (props) => {
+    const location = useLocation()
+    const { ride } = location.state || {}
+    const {socket} = useContext(SocketContext)
+    const navigate = useNavigate()
+
+    socket.on("ride-ended", () => {
+        navigate('/home')
+    })
+
     return (
-        <div className='h-screen bg-white'>
+        <div className='h-screen'>
             <Link to='/home' className='fixed top-2 right-2 h-10 w-10 bg-white flex items-center justify-center rounded-full'>
                 <i className="text-lg font-medium ri-home-6-line"></i>
             </Link>
 
-            <div className='h-1/2'>
+            <div className='h-1/2 bg-white'>
                 <img className='h-full w-full object-cover' src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" alt="" />
             </div>
 
@@ -16,8 +30,8 @@ const Riding = () => {
                 <div className='flex items-center justify-between'>
                     <img className='h-20' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1GH_1MoFhFiPLon-4Zh79ac_lTOYHU8b3Bwr04wie-_3suaeWXfPXmm5kjbUFWiZWWV8&usqp=CAU" alt="" />
                     <div className='text-right'>
-                        <h2 className='text-lg font-medium'>anik</h2>
-                        <h4 className='text-lg font-semibold -mb-1 -mt-1'>WB 67 SD 7865</h4>
+                        <h2 className='text-lg font-medium'>{ride?.captain.fullname.firstname}</h2>
+                        <h4 className='text-lg font-semibold -mb-1 -mt-1'>{ride?.captain.vehicle.plate}</h4>
                         <p className='text-sm text-gray-600'>Maruti Suzuki Alto</p>
                     </div>
                 </div>
@@ -28,14 +42,14 @@ const Riding = () => {
                             <i className="ri-map-pin-user-fill"></i>
                             <div>
                                 <h3 className='text-lg font-medium'>5454/35-W</h3>
-                                <p className='text-sm -mt-1 text-gray-600'>kalina, kbc, mumbai</p>
+                                <p className='text-sm -mt-1 text-gray-600'>{ride?.destination}</p>
                             </div>
                         </div>
 
                         <div className='flex items-center gap-5 p-3'>
                             <i className="ri-money-rupee-circle-line"></i>
                             <div>
-                                <h3 className='text-lg font-medium'>₹192.65</h3>
+                                <h3 className='text-lg font-medium'>₹{ride?.fare}</h3>
                                 <p className='text-sm -mt-1 text-gray-600'>cash</p>
                             </div>
                         </div>
