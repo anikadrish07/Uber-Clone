@@ -5,6 +5,7 @@ import 'remixicon/fonts/remixicon.css'
 import { useEffect, useContext } from 'react'
 import { SocketContext } from '../context/SocketContext'
 import { useNavigate } from 'react-router-dom'
+import LiveTracking from '../components/LIveTracking'
 
 const Riding = (props) => {
     const location = useLocation()
@@ -23,7 +24,8 @@ const Riding = (props) => {
             </Link>
 
             <div className='h-1/2 bg-white'>
-                <img className='h-full w-full object-cover' src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" alt="" />
+            <LiveTracking/>
+                {/* <img className='h-full w-full object-cover' src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" alt="" /> */}
             </div>
 
             <div className='h-1/2 p-4'>
